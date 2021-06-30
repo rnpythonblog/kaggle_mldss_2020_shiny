@@ -89,7 +89,7 @@ ui <- fluidPage(
                     plotOutput("r_ba_da_activity_2020", height = 700),
                     # plotOutput("trends_edu_background"),
                     # plotOutput("trends_edu_profile"),
-                    plotOutput("trends_titles", height = 550),
+                    plotOutput("trends_titles", height = 600),
                     # plotOutput("trends_titles_edu_background",height = 600),
                     plotOutput("comp_levels_python_r", height = 800),
                     plotOutput("comp_levels_ba_da_python_r", height = 800)
@@ -531,7 +531,7 @@ server <- function(input, output) {
             ylim(c(0,max_pct_y + 5)) +
             labs(
                 # tag = "Figure 5",
-                y="Percentage of Respondents",
+                y="Number of Respondents",
                 title = "R and Python over the years",
                 caption = paste("Number of Respondents",
                                  paste0("Year 2020: ",nrow(country_data()$data_2020)),
@@ -540,7 +540,7 @@ server <- function(input, output) {
                                  sep = "\n")) +
             facet_wrap(~Year) +
             theme(title = element_text(size = 16),
-                  axis.title=element_blank(),
+                  axis.title.x=element_blank(),
                   axis.text.x=element_text(size = 12),
                   plot.tag = element_text(size = 12),
                   strip.text = element_text(face="bold", size=16,
@@ -549,7 +549,7 @@ server <- function(input, output) {
                   legend.position = "bottom",
                   legend.text = element_text(size = 12),
                   legend.title = element_blank()) +
-            geom_text(aes(label=paste0(resp_counts," (",resp_pct,"%)")), size = 6, vjust=-1) +
+            geom_text(aes(label=paste0(resp_counts," (",resp_pct,"%)")), size = 5, vjust=-1) +
             scale_fill_manual(values = c("#FF6961","#5C8FEC","#966FD6"))  # Pastel Red, Blue and Purple
         
     })
@@ -594,7 +594,7 @@ server <- function(input, output) {
                 panel.grid.minor = element_blank(),
                 title = element_text(size = 16),
                 axis.title.x=element_blank(),
-                axis.text.x=element_text(size = 12,vjust = -3),
+                axis.text.x=element_text(size = 12,vjust = -2),
                 axis.title.y=element_text(size = 14),
                 axis.text.y=element_blank(),
                 axis.ticks = element_blank(),
@@ -655,7 +655,7 @@ server <- function(input, output) {
                 panel.grid.minor = element_blank(),
                 title = element_text(size = 16),
                 axis.title.x=element_blank(),
-                axis.text.x=element_text(size = 12,vjust = -3),
+                axis.text.x=element_text(size = 12,vjust = -2),
                 axis.title.y=element_text(size = 14),
                 axis.text.y=element_blank(),
                 axis.ticks = element_blank(),
@@ -904,7 +904,7 @@ server <- function(input, output) {
             ggplot(aes(x=Q5,y=resp_count,fill = python_r_choice)) + geom_col(position='dodge') +
             facet_wrap(~Year,nrow = 3, strip.position = "right") +
             theme_void() + 
-            # ylim(c(0,max_y + 50)) +
+            ylim(c(0,max_y + 50)) +
             theme(title = element_text(size = 16),
                   axis.title.x=element_blank(),
                   axis.text.x=element_text(angle=45, hjust=1,size = 12),
@@ -922,10 +922,11 @@ server <- function(input, output) {
                 y = "Number of Respondents",
                 title = "Trends: Distribution of Respondents' Job Titles from 2018-2020",
             ) +
-            geom_text(aes(label=resp_count), position=position_dodge(width=0.9), size = 4, vjust=-0.5) +
+            geom_text(aes(label=resp_count), position=position_dodge(width=0.9), size = 3, vjust=-0.5) +
             scale_fill_manual(values = c("#FF6961","#5C8FEC","#966FD6"))  # Pastel Red, Blue and Purple
         
     })
+    
     
     output$trends_titles<-renderPlot({
         req(trends_titles_plot())
