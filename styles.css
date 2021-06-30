@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@100&display=swap');
+
+.content-margin {
+  margin:12px;
+}
+
+.shiny-plot-output {
+  margin-bottom:24px;
+}
