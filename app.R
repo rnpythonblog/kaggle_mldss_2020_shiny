@@ -46,8 +46,7 @@ ui <- fluidPage(
         column(
             4,
             offset = 1,
-            fluidRow(
-                style = 'border:solid 2px #573320;border-radius:5px;margin-top:24px;margin-right:12px;padding:12px',
+            fluidRow(class = "country-sel",
                 selectInput(
                     "country_sel_dd",
                     shiny::HTML("<p><b><span style='color: #CC5500'>Select Country to Analyze</span></b></p>"),

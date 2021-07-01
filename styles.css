@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@100&display=swap');
 
+.country-sel {
+  border:solid 2px #573320;
+  border-radius:5px;
+  margin-top:24px;
+  margin-right:12px;
+  padding:12px
+
+}
 .content-margin {
   margin:12px;
 }
