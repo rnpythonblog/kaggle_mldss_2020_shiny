@@ -1102,7 +1102,7 @@ server <- function(input, output) {
             mutate(total_resp = sum(c_across(where(is.numeric)))) %>%
             ungroup() %>%
             mutate(across(2:length(.), ~ . / total_resp)) %>%
-            select(-total_resp) %>%
+            select(-total_resp,-NS) %>%
             pivot_longer(-python_r_choice, names_to = 'Comp', values_to = "resp_pct") %>%
             filter(python_r_choice != 'No') %>%
             mutate(Comp = factor(Comp, levels = comp_levels),
@@ -1119,8 +1119,10 @@ server <- function(input, output) {
             theme(
                   title = element_text(size = 16),
                   plot.tag = element_text(size = 14),
-                  axis.title.y=element_blank(),
-                  axis.text=element_text(size = 12),
+                  axis.title.x=element_blank(),
+                  axis.text.x=element_blank(),
+                  axis.ticks.x = element_blank(),
+                  axis.text.y=element_text(size = 12),
                   legend.position = "bottom",
                   legend.title = element_blank(),
                   legend.text = element_text(size = 12),
@@ -1161,13 +1163,16 @@ server <- function(input, output) {
                               ifelse(Q7_Part_1 == "Python" & Q7_Part_2 == "", "Python",
                                      ifelse(Q7_Part_1 == "" & Q7_Part_2 == "R", "R","No")))) %>%
             count(Q24,python_r_choice, name = "resp_count") %>%
-            filter(Q24 != "") %>%
-            pivot_wider(names_from = Q24, values_from = resp_count, values_fill = 0) %>%
+            mutate(Q24 = case_when(
+                Q24 == "" ~"NS",
+                TRUE ~ Q24
+            )) %>%
+            pivot_wider(names_from = Q24, values_from = resp_count, values_fill = 0,names_repair = 'minimal') %>%
             rowwise(python_r_choice) %>%
             mutate(total_resp = sum(c_across(where(is.numeric)))) %>%
             ungroup() %>%
             mutate(across(2:length(.), ~ . / total_resp)) %>%
-            select(-total_resp) %>%
+            select(-total_resp,-NS) %>%
             pivot_longer(-python_r_choice, names_to = 'Comp', values_to = "resp_pct") %>%
             filter(python_r_choice != 'No') %>%
             mutate(Comp = factor(Comp, levels = comp_levels),
@@ -1184,8 +1189,10 @@ server <- function(input, output) {
             theme(
                   title = element_text(size = 16),
                   plot.tag = element_text(size = 14),
-                  axis.title.y=element_blank(),
-                  axis.text=element_text(size = 14),
+                  axis.title.x=element_blank(),
+                  axis.text.x=element_blank(),
+                  axis.ticks.x = element_blank(),
+                  axis.text.y=element_text(size = 12),
                   legend.position = "bottom",
                   legend.title = element_blank(),
                   legend.text = element_text(size = 12),
