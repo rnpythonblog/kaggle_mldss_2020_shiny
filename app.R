@@ -19,7 +19,7 @@ ui <- fluidPage(
         bg = 'cornsilk',
         fg = '#573320',
         primary = '#CC5500',
-        base_font = font_google("Josefin Slab"),
+        base_font = font_google("Josefin Sans"),
         # heading_font = font_google("Josefin Sans"),
         font_scale = 1.2
     ),
@@ -198,7 +198,6 @@ server <- function(input, output) {
             ggplot(aes(x=reorder(Q3,-pct_resp),y=pct_resp)) +
             geom_col(fill="#F79862") +
             ylim(c(0,max(top_10_df$pct_resp) + 10)) +
-            theme_void() +
             labs(title = "Top 10 Countries in terms of Percentage of Respondents",
                  subtitle = paste("They represent",
                                   paste0(t10_total_pct,"%"),
@@ -272,7 +271,6 @@ server <- function(input, output) {
                      sep = '\n')
             ) +
             ylim(c(0,100)) +
-            theme_void() +
             theme(
                 plot.margin=unit(c(1.5,0.5,1.0,0.5),"cm"),
                 title = element_text(size = 20),
@@ -321,7 +319,6 @@ server <- function(input, output) {
             ggplot(aes(x=reorder(PL,-Percentage),y=Percentage,
                        fill = ifelse(PL %in% c('R','Python'), 'ds_language','no_ds_language'))) +
             geom_col() +
-            theme_void() +
             labs(
                 # tag = "Figure 3a",
                 title = "Global Programming Language Preferences",
@@ -361,7 +358,6 @@ server <- function(input, output) {
             ggplot(aes(x=reorder(PL,-Percentage),y=Percentage,
                        fill = ifelse(PL %in% c('R','Python'), 'ds_language','no_ds_language'))) +
             geom_col() +
-            theme_void() +
             labs(
                 # tag = "Figure 3b",
                 y = "Percentage of Respondents",
@@ -413,7 +409,6 @@ server <- function(input, output) {
             ggplot(aes(x=python_r_choice,y=resp_pct,
                        fill = python_r_choice)) +
             geom_col() +
-            theme_void() +
             ylim(c(0,max_global_y + 10)) +
             labs(
                 # tag = "Figure 4a",
@@ -447,7 +442,6 @@ server <- function(input, output) {
             ggplot(aes(x=python_r_choice,y=resp_pct,
                        fill = python_r_choice)) +
             geom_col() +
-            theme_void() +
             ylim(c(0,max_country_y + 10)) +
             labs(
                 # tag = "Figure 4b",
@@ -526,7 +520,6 @@ server <- function(input, output) {
             filter(python_r_choice != 'No') %>%
             ggplot(aes(x=python_r_choice,y=resp_pct, fill = python_r_choice)) +
             geom_col() +
-            theme_void() + 
             ylim(c(0,max_pct_y + 5)) +
             labs(
                 # tag = "Figure 5",
@@ -584,7 +577,6 @@ server <- function(input, output) {
             ggplot(aes(x=Q6,y=resp_count,fill = activity)) +
             geom_col(position='dodge') +
             ylim(c(0,max_y + 10)) +
-            theme_void() + 
             theme(
                 # plot.margin=unit(c(1.0,1.0,1.0,1.0),"cm"),
                 plot.background = element_rect(fill = "cornsilk"),
@@ -645,7 +637,6 @@ server <- function(input, output) {
             ggplot(aes(x=Q5,y=resp_count,fill = activity)) +
             geom_col(position='dodge') +
             ylim(c(0,max_y + 10)) +
-            theme_void() + 
             theme(
                 # plot.margin=unit(c(1.0,1.0,1.0,1.0),"cm"),
                 plot.background = element_rect(fill = "cornsilk"),
@@ -745,7 +736,6 @@ server <- function(input, output) {
             ggplot(aes(x=Q4,y=resp_count,fill = python_r_choice)) +
             geom_col(position='dodge') +
             facet_wrap(~Year,nrow = 3, strip.position = "right") +
-            theme_void() +
             ylim(c(0,max_y + 2)) +
             theme(title = element_text(size=16),
                   axis.title.x=element_blank(),
@@ -819,7 +809,6 @@ server <- function(input, output) {
             ggplot(aes(x=Q4,y=resp_count,fill = Q4)) +
             geom_col(position='dodge') +
             facet_wrap(~Year,nrow = 3, strip.position = "right") + 
-            theme_void() + 
             ylim(c(0,max_y + 1000)) +
             theme(title = element_text(size=16),
                   axis.title.x=element_blank(),
@@ -902,7 +891,6 @@ server <- function(input, output) {
         combined_title_df %>%
             ggplot(aes(x=Q5,y=resp_count,fill = python_r_choice)) + geom_col(position='dodge') +
             facet_wrap(~Year,nrow = 3, strip.position = "right") +
-            theme_void() + 
             ylim(c(0,max_y + 50)) +
             theme(title = element_text(size = 16),
                   axis.title.x=element_blank(),
@@ -980,7 +968,6 @@ server <- function(input, output) {
             geom_col(position = "dodge") +
             ylim(c(0,max_r_count + 5)) +
             facet_wrap(~Year,nrow = 3, strip.position = "left") +
-            theme_void() +
             theme(title = element_text(size = 14),
                   axis.text.x=element_text(angle=45, hjust=1, size = 14),
                   axis.title.x=element_blank(),
@@ -1045,7 +1032,6 @@ server <- function(input, output) {
             geom_col(position = "dodge") +
             ylim(c(0,max_python_count + 15)) +
             facet_wrap(~Year,nrow = 3, strip.position = "right") +
-            theme_void() +
             theme(title = element_text(size = 14),
                   axis.title.x=element_blank(),
                   axis.text.x=element_text(angle=45, hjust=1, size = 14),
@@ -1117,7 +1103,6 @@ server <- function(input, output) {
                                             levels = c("Python","R","Python + R"))) %>%
             ggplot(aes(x=Comp,y=resp_pct,fill = python_r_choice)) +
             geom_col(position = "dodge") +
-            theme_void() + 
             labs(
                 # tag = "Figure 10",
                 y = "Percentage of Respondents",
@@ -1183,7 +1168,6 @@ server <- function(input, output) {
                                             levels = c("Python","R","Python + R"))) %>%
             ggplot(aes(x=Comp,y=resp_pct,fill = python_r_choice)) +
             geom_col(position = "dodge") +
-            theme_void() + 
             labs(
                 # tag = "Figure 10",
                 y = "Percentage of Respondents",
@@ -1238,7 +1222,6 @@ server <- function(input, output) {
             mutate(Q5 = factor(Q5, levels = title_levels_activity)) %>%
             ggplot(aes(x=Q5,y=Count,fill = Activity)) +
             geom_col(position='dodge') +
-            theme_void() + 
             labs(
                 # tag = "Figure 11",
                 y = "Number of Respondents",
@@ -1303,7 +1286,6 @@ server <- function(input, output) {
                  y = "Activity Count", x = "Size of Team") +
             geom_text(aes(label=avg_count),
                       position=position_dodge(width=0.9), size = 4, vjust=-0.5) +
-            theme_void() + 
             theme(title = element_text(size = 16),
                   axis.text.x=element_blank(),
                   axis.title.y=element_text(size = 14),
@@ -1371,7 +1353,6 @@ server <- function(input, output) {
             ggplot(aes(x=fct_reorder2(viz_lib,viz_lib,resp_pct),y=resp_pct,
                        fill = python_r_choice)) +
             geom_col(position = "dodge") +
-            theme_void() + 
             ylim(c(0,max_y + 10)) +
             theme(title = element_text(size = 16),
                   axis.title.x=element_blank(),
@@ -1439,7 +1420,6 @@ server <- function(input, output) {
             geom_col(position = "dodge") +
             ylim(c(0,max_y + 10)) +
             facet_grid(python_r_choice ~ Q5, switch = 'both') +
-            theme_void() +
             theme(
                 title = element_text(size = 16),
                 axis.title.x=element_blank(),
@@ -1511,7 +1491,6 @@ server <- function(input, output) {
             } %>%
             ggplot(aes(x=fct_reorder2(ml_lib,ml_lib,resp_pct),y=resp_pct,fill = python_r_choice)) +
             geom_col(position = "dodge") +
-            theme_void() + 
             ylim(c(0,max_y + 2)) +
             theme(
                 title = element_text(size = 16),
@@ -1581,7 +1560,6 @@ server <- function(input, output) {
             geom_col(position = "dodge") +
             ylim(c(0,max_y + 10)) +
             facet_grid(python_r_choice ~ Q5, switch = 'both') +
-            theme_void() +
             theme(
                 title = element_text(size = 16),
                 axis.title.x=element_blank(),
@@ -1652,7 +1630,6 @@ server <- function(input, output) {
             } %>%
             ggplot(aes(x=reorder(ml_algo,resp_pct),y=resp_pct,fill = python_r_choice)) +
             geom_col(position = "dodge") +
-            theme_void() +
             ylim(c(0,max_x + 5)) +
             theme(title = element_text(size = 16),
                   axis.text.x=element_blank(),
@@ -1698,7 +1675,6 @@ server <- function(input, output) {
             ggplot(aes(x=Q20, y = Count)) +
             geom_col(fill = "#FC8D62") +
             ylim(c(0,max_y + 5)) +
-            theme_void() + 
             labs(
                 # tag = "Figure 17a",
                 title = "Typical Company sizes",
@@ -1725,7 +1701,6 @@ server <- function(input, output) {
             ggplot(aes(x=Q21, y = Count)) +
             geom_col(fill = "#FC8D62") +
             ylim(c(0,max_y + 5)) +
-            theme_void() + 
             labs(
                 # tag = "Figure 17b",
                 title = "Typical Team sizes",

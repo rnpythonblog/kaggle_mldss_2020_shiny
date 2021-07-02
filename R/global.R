@@ -2,7 +2,7 @@
 
 library(bslib)
 library(thematic)
-
+library(showtext)
 library(ggplot2)
 library(dplyr, quietly = T)
 library(tibble)
@@ -16,11 +16,11 @@ library(scales)
 library(shinyWidgets)
 
 ## Center Title ##
-theme_update(plot.title = element_text(hjust = 0.5,
-                                       colour = '#70A0BE',
-                                       family = 'Helvetica',
-                                       margin=margin(0,0,24,0)),
-             plot.margin = margin(1, 1, 1, 1, "cm"))
+# theme_update(plot.title = element_text(hjust = 0.5,
+#                                        colour = '#70A0BE',
+#                                        family = 'Helvetica',
+#                                        margin=margin(0,0,24,0)),
+#              plot.margin = margin(1, 1, 1, 1, "cm"))
 
 DATA_DIR<-"data"
 mldss_df<-read.csv(file.path(DATA_DIR,"kmldss2020.csv"))
