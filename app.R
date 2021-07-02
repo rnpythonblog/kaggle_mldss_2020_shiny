@@ -1510,7 +1510,7 @@ server <- function(input, output) {
             theme(
                 title = element_text(size = 16),
                 axis.title.x=element_blank(),
-                axis.text.x=element_text(size=12),
+                axis.text.x=element_text(angle = 45, size=12),
                 axis.title.y=element_text(size = 14),
                 axis.text.y=element_blank(),
                 axis.ticks.y = element_blank(),
@@ -1647,7 +1647,7 @@ server <- function(input, output) {
             ggplot(aes(x=reorder(ml_algo,resp_pct),y=resp_pct,fill = python_r_choice)) +
             geom_col(position = "dodge") +
             ylim(c(0,max_x + 5)) +
-            theme(title = element_text(size = 16),
+            theme(title = element_text(size = 12),
                   axis.text.x=element_blank(),
                   axis.text.y=element_text(size=14),
                   axis.title.y=element_blank(),
